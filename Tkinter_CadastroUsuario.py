@@ -19,7 +19,29 @@ def pg3():
     for elemento in janela.winfo_children():
         elemento.destroy()
     tk.Button(janela, text="VOLTAR", command=pg1).place(relx=0.8, rely=0.7, anchor="center")
-    tk.Label(janela, text="3").pack(pady=50)
+    # Frame2 =======================
+    Frame2 = tk.Frame(janela, bd=4, bg="#222626", highlightbackground="darkblue")
+    Frame2.place(relx=0.5, rely=0.45,relwidth=0.5, relheight=0.7,anchor="center")
+    #=======================
+    # email =======================
+    emailLogin = tk.Label(Frame2, text="Email", bg ="#222626", fg="white" )
+    emailLogin.place(relx=0.24, rely=0.34, anchor="center")
+    entrada_emailLogin = tk.Entry(Frame2, highlightbackground="black", highlightthickness=2)
+    entrada_emailLogin.place(relx=0.5,rely=0.4, relwidth=0.6, relheight=0.08,anchor="center")
+    #=======================
+    # senha =======================
+    senhaLogin = tk.Label(Frame2, text="Password", bg ="#222626", fg="white" )
+    senhaLogin.place(relx=0.26, rely=0.54, anchor="center")
+    entrada_senhaLogin = tk.Entry(Frame2, highlightbackground="black", highlightthickness=2)
+    entrada_senhaLogin.place(relx=0.5,rely=0.6, relwidth=0.6, relheight=0.08,anchor="center")
+    #=======================
+    # Titles =======================
+    tk.Label(Frame2, text="Login", bg ="#222626", fg="white", font=("Arial", 16, "bold")).place(relx=0.25,rely=0.25,anchor="center")
+    tk.Label(Frame2, text="Página de Login", bg="#222626", fg="white",font=("Arial", 16, "bold")).place(relx=0.5,rely=0.1, anchor="center")
+    #=======================
+    # Send_Button =======================
+    tk.Button(Frame2,text="Enviar", bg="#013754", fg="White").place(relx=0.5, rely=0.75,relwidth=0.3,relheight=0.1, anchor="center")
+    # =======================
 def pg2():
     for elemento in janela.winfo_children():
         elemento.destroy()
