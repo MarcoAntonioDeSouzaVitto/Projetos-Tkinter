@@ -18,7 +18,25 @@ janela.title("Banana")
 def pg3():
     for elemento in janela.winfo_children():
         elemento.destroy()
-    tk.Button(janela, text="VOLTAR", command=pg1).place(relx=0.8, rely=0.7, anchor="center")
+    def pegar_dados():
+        global aviso
+        try:
+            aviso.place_forget()
+        except:
+            pass
+        e = entrada_emailLogin.get().strip()
+        p = entrada_senhaLogin.get().strip()
+        funcio.execute("SELECT email,password FROM cadastro1 WHERE email = ? AND password = ?", (e,p))
+        resultado = funcio.fetchall()
+        if resultado:
+            funcio.execute("SELECT username FROM cadastro1 WHERE email = ?", (e,))
+            user = funcio.fetchone()
+            msg = f"LOGIN FEITO!\nSeja bem vindo {user[0]}!"
+        else:
+            msg = "SENHA OU EMAIL INCORRETOS!"
+        aviso = tk.Label(janela, text= msg, bg="#222626", fg="white", font=("arial", 12, "bold"))
+        aviso.place(relx=0.5, rely=0.7, anchor="center")
+    tk.Button(janela, text="VOLTAR", command=pg1).place(relx=0.9, rely=0.95, anchor="center", relwidth=0.08,relheight=0.05)
     # Frame2 =======================
     Frame2 = tk.Frame(janela, bd=4, bg="#222626", highlightbackground="darkblue")
     Frame2.place(relx=0.5, rely=0.45,relwidth=0.5, relheight=0.7,anchor="center")
@@ -40,7 +58,7 @@ def pg3():
     tk.Label(Frame2, text="Página de Login", bg="#222626", fg="white",font=("Arial", 16, "bold")).place(relx=0.5,rely=0.1, anchor="center")
     #=======================
     # Send_Button =======================
-    tk.Button(Frame2,text="Enviar", bg="#013754", fg="White").place(relx=0.5, rely=0.75,relwidth=0.3,relheight=0.1, anchor="center")
+    tk.Button(Frame2,text="Enviar", bg="#013754", fg="White", command=pegar_dados).place(relx=0.5, rely=0.75,relwidth=0.3,relheight=0.1, anchor="center")
     # =======================
 def pg2():
     for elemento in janela.winfo_children():
