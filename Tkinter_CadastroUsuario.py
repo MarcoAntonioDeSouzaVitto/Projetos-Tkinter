@@ -44,13 +44,13 @@ def pg3():
     # email =======================
     emailLogin = tk.Label(Frame2, text="Email", bg ="#222626", fg="white" )
     emailLogin.place(relx=0.24, rely=0.34, anchor="center")
-    entrada_emailLogin = tk.Entry(Frame2, highlightbackground="black", highlightthickness=2)
+    entrada_emailLogin = tk.Entry(Frame2, highlightbackground="black", highlightthickness=2, font=("Arial", 14))
     entrada_emailLogin.place(relx=0.5,rely=0.4, relwidth=0.6, relheight=0.08,anchor="center")
     #=======================
     # senha =======================
     senhaLogin = tk.Label(Frame2, text="Password", bg ="#222626", fg="white" )
     senhaLogin.place(relx=0.26, rely=0.54, anchor="center")
-    entrada_senhaLogin = tk.Entry(Frame2, highlightbackground="black", highlightthickness=2)
+    entrada_senhaLogin = tk.Entry(Frame2, highlightbackground="black", highlightthickness=2, show="*", font=("Arial", 14))
     entrada_senhaLogin.place(relx=0.5,rely=0.6, relwidth=0.6, relheight=0.08,anchor="center")
     #=======================
     # Titles =======================
@@ -63,7 +63,6 @@ def pg3():
 def pg2():
     for elemento in janela.winfo_children():
         elemento.destroy()
-    tk.Label(janela, text="Página de Cadastro",bg="#121414",fg="white", font=("Arial", 18, "bold")).pack(pady=10)
     def pegar_all_dados():
         global aviso
         try:
@@ -89,62 +88,57 @@ def pg2():
             if not search is None:
                 msg = "EMAIL JÁ CADASTRADO NO SISTEMA!"
         if msg != "":
-            aviso = tk.Label(frame_1, text=msg, fg="red", bg="lightblue", font=("Arial", 12, "bold"))
+            aviso = tk.Label(frame_1, text=msg, fg="red", bg="#222626", font=("Arial", 12, "bold"))
         else:
-            aviso = tk.Label(frame_1, text="LOGIN FEITO COM SUCESSO!", fg="green", bg="lightblue",
+            aviso = tk.Label(frame_1, text="CADASTRO REALIZADO COM SUCESSO!", fg="green", bg="#222626",
                              font=("Arial", 12, "bold"))
             funcio.execute("INSERT INTO cadastro1(username,email,password) VALUES(?,?,?)", (u, e, s))
             conexao.commit()
             print(f"Sucesso: {u}, {e}, {s}")
-        aviso.place(relx=0.5, rely=0.73, anchor="center")
+        aviso.place(relx=0.5, rely=0.93, anchor="center")
 
     # Frame =======================
-    frame_1 = tk.Frame(janela, bd=4, bg="lightblue", highlightbackground="darkblue", highlightthickness=2)
-    frame_1.place(relx=0.5, rely=0.45, relwidth=0.5, relheight=0.7, anchor="center")
+    frame_1 = tk.Frame(janela, bd=4, bg="#222626")
+    frame_1.place(relx=0.5, rely=0.5, relwidth=0.5, relheight=0.85, anchor="center")
     # =======================
-
+    tk.Label(frame_1, text="Página de Cadastro", bg="#222626", fg="white", font=("Arial", 18, "bold")).place(relx=0.5, rely=0.05, anchor="center")
+    tk.Label(frame_1, text="Create an account", bg="#222626", fg="white", font=("Arial", 14, "bold")).place(relx=0.185, rely=0.15, anchor="w")
     # Username =======================
-    nome = tk.Label(frame_1, text="Username: ", bg="lightblue")
+    nome = tk.Label(frame_1, text="Username: ", bg="#222626",fg= "white")
     nome.config(font=("Georgia", 10))
-    nome.place(relx=0.1, rely=0.2, anchor="w")
+    nome.place(relx=0.2, rely=0.26, anchor="w")
 
-    entrada_username = tk.Entry(frame_1, highlightbackground="black", highlightthickness=1)
-    entrada_username.place(relx=0.65, rely=0.2, anchor="center", relwidth=0.5, relheight=0.05)
+    entrada_username = tk.Entry(frame_1, highlightbackground="black", highlightthickness=2, font=("Arial", 14))
+    entrada_username.place(relx=0.5,rely=0.31, relwidth=0.6, relheight=0.08,anchor="center")
     # =======================
 
     # Email =======================
-    email = tk.Label(frame_1, text="Email: ", bg="lightblue")
+    email = tk.Label(frame_1, text="Email: ", bg="#222626",fg= "white")
     email.config(font=("Georgia", 10))
-    email.place(relx=0.1, rely=0.3, anchor="w")
-    entrada_email = tk.Entry(frame_1, highlightbackground="black", highlightthickness=1)
-    entrada_email.place(relx=0.65, rely=0.3, anchor="center", relwidth=0.5, relheight=0.05)
+    email.place(relx=0.2, rely=0.39, anchor="w")
+    entrada_email = tk.Entry(frame_1, highlightbackground="black", highlightthickness=2, font=("Arial", 14))
+    entrada_email.place(relx=0.5,rely=0.44, relwidth=0.6, relheight=0.08,anchor="center")
     # =======================
 
     # Senha =======================
-    Password = tk.Label(frame_1, text="Password: ", bg="lightblue")
+    Password = tk.Label(frame_1, text="Password: ", bg="#222626",fg= "white")
     Password.config(font=("Georgia", 10))
-    Password.place(relx=0.1, rely=0.4, anchor="w")
-    entrada_senha = tk.Entry(frame_1, highlightbackground="black", highlightthickness=1)
-    entrada_senha.place(relx=0.65, rely=0.4, anchor="center", relwidth=0.5, relheight=0.05)
+    Password.place(relx=0.2, rely=0.52, anchor="w")
+    entrada_senha = tk.Entry(frame_1, highlightbackground="black", highlightthickness=2, show="*", font=("Arial", 14))
+    entrada_senha.place(relx=0.5,rely=0.57, relwidth=0.6, relheight=0.08,anchor="center")
     # =======================
 
     # Confirmação Senha =======================
-    Password_conf = tk.Label(frame_1, text="Password Confirm: ", bg="lightblue")
+    Password_conf = tk.Label(frame_1, text="Password Confirm: ", bg="#222626",fg= "white")
     Password_conf.config(font=("Georgia", 10))
-    Password_conf.place(relx=0.1, rely=0.5, anchor="w")
-    entrada_conf_senha = tk.Entry(frame_1, highlightbackground="black", highlightthickness=1)
-    entrada_conf_senha.place(relx=0.65, rely=0.5, anchor="center", relwidth=0.5, relheight=0.05)
+    Password_conf.place(relx=0.2, rely=0.65, anchor="w")
+    entrada_conf_senha = tk.Entry(frame_1, highlightbackground="black", highlightthickness=2, show="*", font=("Arial", 14))
+    entrada_conf_senha.place(relx=0.5,rely=0.7, relwidth=0.6, relheight=0.08,anchor="center")
 
     # =======================
 
-    def close_pagina():
-        conexao.close()
-        janela.destroy()
-
-    close = tk.Button(frame_1, text="Close", command=close_pagina)
-    close.place(relx=0.9, rely=0.9, anchor="center")
-    enviar = tk.Button(frame_1, text="Enviar", command=pegar_all_dados)
-    enviar.place(relx=0.5, rely=0.65, relwidth=0.3, relheight=0.07, anchor="center")
+    enviar = tk.Button(frame_1, text="Enviar",bg="#013754", fg="White", command=pegar_all_dados)
+    enviar.place(relx=0.5, rely=0.83, relwidth=0.3, relheight=0.08, anchor="center")
 
     tk.Button(janela, text="VOLTAR", command=pg1).place(relx=0.9, rely=0.95, anchor="center", relwidth=0.08,relheight=0.05)
 
@@ -157,3 +151,4 @@ def pg1():
     tk.Button(janela,text="CADASTRO", command=pg2).place(relx=0.5, rely=0.55, anchor="center", relwidth=0.2,relheight=0.1)
 pg1()
 janela.mainloop()
+conexao.close()
