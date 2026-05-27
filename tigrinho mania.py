@@ -144,9 +144,13 @@ def lets_go_gambling():
     for elementos in janela.winfo_children():
         elementos.destroy()
     janela.config(bg="#403f3e")
+    username_logado = funcio.execute("SELECT username FROM bancoDeDados WHERE email = ?", (e,))
     # =====~Frame~===========----------
     frame_menu = tk.Frame(janela, bg="#cc1212")
     frame_menu.place(relx=0.5,rely=0.05,relwidth=1,relheight=0.15,anchor="center")
+    # =====~Principal Menu~===========----------
+    tk.Label(frame_menu, text="Grande\nOnção", bg="#cc1212",fg="white", font=("Agency FB", 24, "bold")).place(relx=0.1,rely=0.55, anchor="center")
+    deposito = tk.Label(frame_menu,text=f"Olá,{}")
 menu()
 janela.mainloop()
 conexao.close()
