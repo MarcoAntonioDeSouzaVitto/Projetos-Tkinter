@@ -1,16 +1,19 @@
 import tkinter as tk
 import sqlite3
+name_user = "Guest"
+saldo = 0
 janela = tk.Tk()
 janela.title("GRANDE_ONÇÃO")
 janela.minsize(width=900, height=700)
-conexao = sqlite3.connect("dados_onca.db")
+conexao = sqlite3.connect("dadosonca1.db")
 funcio = conexao.cursor()
 funcio.execute("""
     CREATE TABLE IF NOT EXISTS bancoDeDados(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT NOT NULL,
     email TEXT NOT NULL,
-    password TEXT NOT NULL
+    password TEXT NOT NULL,
+    saldo REAL NOT NULL
 )
 """)
 def menu():
@@ -40,6 +43,7 @@ def login():
         elementos.destroy()
     janela.config(bg="#403f3e")
     def pegar_dados():
+        global name_user, saldo
         e = email_entry.get().strip()
         p = password_entry.get().strip()
         funcio.execute("SELECT email, password FROM bancoDeDados WHERE email = ? AND password = ?",(e,p))
@@ -49,6 +53,10 @@ def login():
             aviso = tk.Label(frame_menu, text=msg, bg="#222626", fg="red", font=("arial", 12, "bold"))
             aviso.place(relx=0.5, rely=0.59, anchor="center")
         else:
+            funcio.execute("SELECT username,saldo from bancoDeDados WHERE email = ?", (e,))
+            resultado = funcio.fetchone()
+            name_user = resultado[0]
+            saldo = resultado[1]
             lets_go_gambling()
 
     # =====~Frame~===========----------
@@ -80,11 +88,12 @@ def cadastro():
     janela.config(bg="#403f3e")
 
     def pegar_dados():
-
+        global name_user, saldo
         u = username_entry.get()
         e = email_entry.get()
         p = password_entry.get()
         pc = passwordConfirm_entry.get()
+        saldo = 0
         msg = ""
         if u == "" or e == "" or p == "" or pc == "":
             msg = "FILL IN ALL FIELDS"
@@ -103,7 +112,8 @@ def cadastro():
             aviso = tk.Label(frame_menu, text=msg, fg="red", bg="#222626", font=("Arial", 12, "bold"))
         else:
             aviso = tk.Label(frame_menu, text="CADASTRO REALIZADO COM SUCESSO!", fg="green", bg="#222626",font=("Arial", 12, "bold"))
-            funcio.execute("""INSERT INTO bancoDeDados(username, email, password)VALUES (?, ?, ?)""", (u, e, p))
+            funcio.execute("""INSERT INTO bancoDeDados(username, email, password, saldo)VALUES (?, ?, ?,?)""", (u, e, p, saldo))
+            name_user = u
             menu()
             conexao.commit()
         aviso.place(relx=0.5, rely=0.715, anchor="center")
@@ -141,16 +151,21 @@ def cadastro():
 
 
 def lets_go_gambling():
+    global name_user, saldo
     for elementos in janela.winfo_children():
         elementos.destroy()
     janela.config(bg="#403f3e")
-    username_logado = funcio.execute("SELECT username FROM bancoDeDados WHERE email = ?", (e,))
     # =====~Frame~===========----------
     frame_menu = tk.Frame(janela, bg="#cc1212")
     frame_menu.place(relx=0.5,rely=0.05,relwidth=1,relheight=0.15,anchor="center")
     # =====~Principal Menu~===========----------
     tk.Label(frame_menu, text="Grande\nOnção", bg="#cc1212",fg="white", font=("Agency FB", 24, "bold")).place(relx=0.1,rely=0.55, anchor="center")
-    deposito = tk.Label(frame_menu,text=f"Olá,{}")
+    ola = tk.Label(frame_menu,text=f"Hello, {name_user} 🐯!",bg="#cc1212",fg="white", font=("Arial", 10, "bold"))
+    ola.place(relx=0.75,rely=0.3)
+    saldo_label = tk.Label(frame_menu,text=f"R$ {saldo:.2f}",bg="#cc1212", fg= "gold", font=("Arial", 15))
+    saldo_label.place(relx=0.75,rely=0.5)
+    deposito = tk.Button(frame_menu, text="Depósito", fg="black", bg="lightyellow",font=("Arial",12))
+    deposito.place(relx=0.9,rely=0.5)
 menu()
 janela.mainloop()
 conexao.close()
