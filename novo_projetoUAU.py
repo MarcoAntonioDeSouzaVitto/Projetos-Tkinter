@@ -4,13 +4,59 @@ ctk.set_appearance_mode("dark")
 janela = ctk.CTk()
 janela.geometry("900x700")
 janela.title("Grand Jaguar")
+
+conexao = sqlite3.connect("mkV3060.db")
+funcio = conexao.cursor()
+funcio.execute("""
+    CREATE TABLE IF NOT EXISTS base(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT NOT NULL,
+        email TEXT NOT NULL,
+        password TEXT NOT NULL,
+        saldo REAL NOT NULL,
+        pp TEXT NOT NULL
+)
+""")
 def lobby():
     janela.configure(fg_color="#121212")
     frameLobby = ctk.CTkFrame(janela, fg_color="red", width=3000,height=125, corner_radius=0)
     frameLobby.place(relx=0.5, rely=0.05, anchor="center")
     ctk.CTkLabel(frameLobby, text="Grand Jaguar",fg_color="red", font=("Agency FB", 42, "bold")).place(relx=0.5,rely=0.5,anchor="center")
     go_game = ctk.CTkButton(janela, text="Game",corner_radius=75,width=150,height=150, command=game)
-    go_game.place(relx=0.5, rely=0.5, anchor="center")
+    go_game.place(relx=0.9, rely=0.9, anchor="center")
+
+    frameLogin = ctk.CTkFrame(janela, fg_color="#101c30", width=950,height=650)
+    frameLogin.place(relx=0.5,rely=0.5,anchor= "center")
+    frameVE = ctk.CTkFrame(frameLogin, fg_color="#ffdc82",width=4,height=600)
+    frameVE.place(relx=0.5,rely=0.5, anchor = "center")
+
+    ctk.CTkLabel(frameLogin, text="WELCOME BACK", font=("Arial Regular", 28, "bold")).place(relx=0.25,rely=0.1,anchor="center")
+    ctk.CTkLabel(frameLogin, text="E-mail", font=("Arial Regular", 16)).place(relx=0.09, rely=0.27,anchor="center")
+    ctk.CTkLabel(frameLogin, text="Password", font=("Arial Regular", 16)).place(relx=0.104, rely=0.422, anchor="center")
+    email_login = ctk.CTkEntry(frameLogin,width=350,height=50,placeholder_text="👤 E-mail", font=("Arial Regular",20))
+    email_login.place(relx=0.25,rely=0.33,anchor="center")
+    passwrd_login = ctk.CTkEntry(frameLogin,width=350,height=50,placeholder_text="🔒 Password", font=("Arial Regular",20))
+    passwrd_login.place(relx=0.25,rely=0.48,anchor="center")
+    send = ctk.CTkButton(frameLogin,text="ENTER",width=300,height=50, corner_radius=150, font=("Arial Regular",20))
+    send.place(relx=0.25,rely=0.63,anchor="center")
+
+    ctk.CTkLabel(frameLogin, text="NEW HERE?", font=("Arial Regular", 28, "bold")).place(relx=0.75,rely=0.1,anchor="center")
+    ctk.CTkLabel(frameLogin, text="Username", font=("Arial Regular", 16)).place(relx=0.75, rely=0.27,anchor="center")
+    ctk.CTkLabel(frameLogin, text="E-mail", font=("Arial Regular", 16)).place(relx=0.8, rely=0.27,anchor="center")
+    ctk.CTkLabel(frameLogin, text="Password", font=("Arial Regular", 16)).place(relx=0.75, rely=0.422, anchor="center")
+    ctk.CTkLabel(frameLogin, text="Confirm Password", font=("Arial Regular", 16)).place(relx=0.8, rely=0.422, anchor="center")
+    username_create = ctk.CTkEntry(frameLogin,width=350,height=50,placeholder_text="👤 Username", font=("Arial Regular",20))
+    username_create.place(relx=0.75,rely=0.285,anchor="center")
+    email_create = ctk.CTkEntry(frameLogin, width=350, height=50, placeholder_text="📩 E-mail",font=("Arial Regular", 20))
+    email_create.place(relx=0.75, rely=0.40, anchor="center")
+    passwrd_create = ctk.CTkEntry(frameLogin,width=350,height=50,placeholder_text="🔒 Password", font=("Arial Regular",20))
+    passwrd_create.place(relx=0.75,rely=0.515,anchor="center")
+    confpasswrd_create = ctk.CTkEntry(frameLogin,width=350,height=50,placeholder_text="🔐 Confirm Password", font=("Arial Regular",20))
+    confpasswrd_create.place(relx=0.75,rely=0.63,anchor="center")
+    send = ctk.CTkButton(frameLogin,text="CREATE ACCOUNT",width=300,height=50, corner_radius=150, font=("Arial Regular",20))
+    send.place(relx=0.75,rely=0.8,anchor="center")
+
+
 def game():
     for elemento in janela.winfo_children():
         elemento.destroy()
@@ -35,7 +81,7 @@ def game():
 
     frameAdd = ctk.CTkFrame(janela,fg_color="orange", height=300, corner_radius=10)
     frameAdd.place(relx = 0.55, rely= 0.3, relwidth = 0.8, anchor = "center")
-    ctk.CTkLabel(frameAdd, text="Primeiro cassino\n honesto\n do Brasl!", font=("Arial Black", 38   )).place(relx=0.15, rely = 0.5, anchor = "center")
+    ctk.CTkLabel(frameAdd, text="Primeiro cassino\n honesto\n do BrasIl!", font=("Arial Black", 38   )).place(relx=0.15, rely = 0.5, anchor = "center")
     ctk.CTkLabel(janela, text="Populares", font=("Century Gothic", 28, "bold")).place(relx=0.15, rely = 0.54, anchor = "center")
     ctk.CTkButton(janela,text=f"{"\n"*8}Caça-Níquel",command=niquel,width=300,height=380,font=("Lucida Sans", 32, "bold"),fg_color="#d4374f", hover_color="#d4374f").place(relx=0.2,rely=0.78,anchor = "center")
     ctk.CTkButton(janela, text="🎰", font=("Century Gothic", 60, "bold"),fg_color="#d4374f", text_color="white",hover_color="#d4374f",command=niquel, corner_radius=0).place(relx=0.2, rely=0.78, anchor="center")
@@ -101,12 +147,52 @@ def cavalo():
     apostaframe = ctk.CTkFrame(janela,fg_color="#24282b",width=900,height=700)
     apostaframe.place(relx=0.5,rely=0.5,anchor="center")
 
-    corredor_escolhido = ctk.StringVar(value="Cavalinho 1")
-    ctk.CTkLabel(apostaframe, text="Escolha o Cavalinho:", font=("Arial", 12, "bold"),corner_radius=0).grid(row=0, column=0,
-                                                                                                  padx=10, pady=5)
-    menu_corredores = ctk.CTkOptionMenu(apostaframe,corner_radius=0, button_hover_color="#24282b", variable=corredor_escolhido,
-                                             values=["Cavalinho 1", "Cavalinho 2", "Cavalinho 3"])
-    menu_corredores.grid(row=0, column=1, padx=10, pady=5)
+    corredor_escolhido = ctk.StringVar(value="- - -")
+
+    lbl_escolha = ctk.CTkLabel(
+        apostaframe,
+        text="Escolha o Cavalinho:",
+        font=("Arial", 12, "bold"),
+        corner_radius=0
+    )
+    lbl_escolha.place(relx=0.25, rely=0.05, anchor="w")
+
+    menu_corredores = ctk.CTkOptionMenu(
+        apostaframe,
+        corner_radius=0,
+        button_hover_color="#24282b",
+        variable=corredor_escolhido,
+        values=["Gordiço ", "Felipe", "Omni-man","Putrefação das trevas","Bob"]
+    )
+    menu_corredores.place(relx=0.4, rely=0.05, anchor="w")
+
+    pista = ctk.CTkFrame(janela, fg_color="#1a1a1a", height=350)
+    pista.place(relx=0.5, rely=0.5, relwidth=0.425, anchor="center")
+    pista.pack_propagate(False)
+
+    c1 = ctk.CTkButton(pista, text="🐴", fg_color= "red", width=40, height=40, corner_radius=20, font=("Arial", 24, "bold"))
+    c1._canvas.config(width=40, height=40)
+    c1.place(x=20, y=20)
+
+    c2 = ctk.CTkButton(pista, text="🐴", fg_color="blue", width=40, height=40, corner_radius=20, font=("Arial", 24, "bold"))
+    c2._canvas.config(width=40, height=40)
+    c2.place(x=20, y=80)
+
+    c3 = ctk.CTkButton(pista, text="🐴", fg_color="darkred", width=40, height=40, corner_radius=20, font=("Arial", 24, "bold"))
+    c3._canvas.config(width=40, height=40)
+    c3.place(x=20, y=140)
+
+    c4 = ctk.CTkButton(pista, text="🐴", fg_color="green", width=40, height=40, corner_radius=20, font=("Arial", 24, "bold"))
+    c4._canvas.config(width=40, height=40)
+    c4.place(x=20, y=200)
+
+    c5 = ctk.CTkButton(pista, text="🐴", fg_color="brown", width=40, height=40, corner_radius=20, font=("Arial", 24, "bold"))
+    c5._canvas.config(width=40, height=40)
+    c5.place(x=20, y=260)
+
+    btn_iniciar = ctk.CTkButton(janela, text="CORRER! 🏁", font=("Arial", 16, "bold"), fg_color="#4da616",hover_color="#3d8512")
+    btn_iniciar.place(relx=0.5, rely= 0.8, anchor = "center")
+
 lobby()
 janela.after(0, lambda: janela.state("zoomed"))
 janela.mainloop()
