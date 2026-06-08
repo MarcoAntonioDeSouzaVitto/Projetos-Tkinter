@@ -19,28 +19,94 @@ def game():
     frameLobby.place(relx=0.0, rely=0.0, relwidth=1.0, anchor="nw")
 
     bordaframeHO = ctk.CTkFrame(janela, fg_color="white", height=2, corner_radius=0)
-    bordaframeHO.place(relx=0.0, y=125, relwidth=1.0, anchor="nw")
+    bordaframeHO.place(relx=0.0, y=105, relwidth=1.0, anchor="nw")
     bordaframeVE = ctk.CTkFrame(janela, fg_color="white", height=1200, corner_radius=0)
-    bordaframeVE.place(relx=0.1, rely= 0.125, relwidth=0.001, anchor="nw")
+    bordaframeVE.place(relx=0.1, rely= 0.105, relwidth=0.001, anchor="nw")
 
     botao3traco = ctk.CTkButton(frameLobby,fg_color="#141c24", text="≡", font=("Agency FB", 73, "bold"), hover_color="#141c24")
-    botao3traco.place(relx=0.03,rely=0.45,anchor="center")
-    ctk.CTkLabel(frameLobby, text="Grand\n       Jaguar",fg_color="#141c24", font=("Agency FB", 38, "bold")).place(relx=0.12,rely=0.5,anchor="center")
-    ctk.CTkLabel(frameLobby, text="🐯", text_color="Orange", fg_color="#141c24", font=("Agency FB", 46, "bold")).place(relx=0.08, rely=0.5, anchor="center")
+    botao3traco.place(relx=0.03,rely=0.40,anchor="center")
+    ctk.CTkLabel(frameLobby, text="Grand\n       Jaguar",fg_color="#141c24", font=("Agency FB", 35, "bold")).place(relx=0.12,rely=0.45,anchor="center")
+    ctk.CTkLabel(frameLobby, text="🐯", text_color="Orange", fg_color="#141c24", font=("Agency FB", 43, "bold")).place(relx=0.08, rely=0.45, anchor="center")
 
     botao_casino = ctk.CTkButton(frameLobby, text="♠cassino",font=("Lucida Sans", 21, "bold"), text_color="#c9c9c9", fg_color="#141c24",hover_color="#d60222")
-    botao_casino.place(relx=0.3,rely=0.55,anchor="center")
+    botao_casino.place(relx=0.3,rely=0.50,anchor="center")
     botao_esporte = ctk.CTkButton(frameLobby, text="🏀esportes",font=("Lucida Sans", 21, "bold"), text_color="#c9c9c9", fg_color="#141c24",hover_color="#d60222")
-    botao_esporte.place(relx=0.38,rely=0.55,anchor="center")
+    botao_esporte.place(relx=0.38,rely=0.50,anchor="center")
 
     frameAdd = ctk.CTkFrame(janela,fg_color="orange", height=300, corner_radius=10)
     frameAdd.place(relx = 0.55, rely= 0.3, relwidth = 0.8, anchor = "center")
     ctk.CTkLabel(frameAdd, text="Primeiro cassino\n honesto\n do Brasl!", font=("Arial Black", 38   )).place(relx=0.15, rely = 0.5, anchor = "center")
     ctk.CTkLabel(janela, text="Populares", font=("Century Gothic", 28, "bold")).place(relx=0.15, rely = 0.54, anchor = "center")
-    ctk.CTkButton(janela,text=f"{"\n"*8}Caça-Níquel",width=300,height=380,font=("Lucida Sans", 32, "bold"),fg_color="#d4374f", hover_color="#d4374f").place(relx=0.2,rely=0.78,anchor = "center")
-    ctk.CTkLabel(janela, text="🎰", font=("Century Gothic", 60, "bold"),fg_color="#d4374f", text_color="white").place(relx=0.2, rely=0.78, anchor="center")
-    ctk.CTkButton(janela, text=f"{"\n" * 8}Cavalinhos", width=300, height=380, font=("Lucida Sans", 32, "bold"),fg_color="#37d444", hover_color="#37d444").place(relx=0.38, rely=0.78, anchor="center")
-    ctk.CTkLabel(janela, text="🎠", font=("Century Gothic", 60), fg_color="#37d444", text_color="#61360e").place(relx=0.38, rely=0.78, anchor="center")
+    ctk.CTkButton(janela,text=f"{"\n"*8}Caça-Níquel",command=niquel,width=300,height=380,font=("Lucida Sans", 32, "bold"),fg_color="#d4374f", hover_color="#d4374f").place(relx=0.2,rely=0.78,anchor = "center")
+    ctk.CTkButton(janela, text="🎰", font=("Century Gothic", 60, "bold"),fg_color="#d4374f", text_color="white",hover_color="#d4374f",command=niquel, corner_radius=0).place(relx=0.2, rely=0.78, anchor="center")
+    ctk.CTkButton(janela, text=f"{"\n" * 8}Cavalinhos", width=300, height=380, font=("Lucida Sans", 32, "bold"),fg_color="#37d444", hover_color="#37d444",command=cavalo).place(relx=0.38, rely=0.78, anchor="center")
+    ctk.CTkButton(janela, text="🎠", font=("Century Gothic", 60), fg_color="#37d444", text_color="#61360e",corner_radius=0,hover_color="#37d444",command=cavalo).place(relx=0.38, rely=0.78, anchor="center")
+def niquel():
+    for elemento in janela.winfo_children():
+        elemento.destroy()
+    janela.configure(fg_color="#141c24")
+    frameLobby = ctk.CTkFrame(janela, fg_color="#141c24", height=125, corner_radius=0)
+    frameLobby.place(relx=0.0, rely=0.0, relwidth=1.0, anchor="nw")
+
+    bordaframeHO = ctk.CTkFrame(janela, fg_color="white", height=2, corner_radius=0)
+    bordaframeHO.place(relx=0.0, y=105, relwidth=1.0, anchor="nw")
+
+    botao3traco = ctk.CTkButton(frameLobby, fg_color="#141c24", text="≡", font=("Agency FB", 73, "bold"),hover_color="#141c24")
+    botao3traco.place(relx=0.03, rely=0.40, anchor="center")
+    ctk.CTkLabel(frameLobby, text="Grand\n       Jaguar", fg_color="#141c24", font=("Agency FB", 35, "bold")).place(relx=0.12, rely=0.45, anchor="center")
+    ctk.CTkButton(frameLobby, text="🐯", text_color="Orange", fg_color="#141c24",command= game, hover_color="#141c24",width=40, font=("Agency FB", 43, "bold")).place(relx=0.08, rely=0.45, anchor="center")
+
+    botao_casino = ctk.CTkButton(frameLobby, text="♠cassino", font=("Lucida Sans", 21, "bold"), text_color="#c9c9c9",fg_color="#141c24", hover_color="#d60222")
+    botao_casino.place(relx=0.3, rely=0.50, anchor="center")
+    botao_esporte = ctk.CTkButton(frameLobby, text="🏀esportes", font=("Lucida Sans", 21, "bold"), text_color="#c9c9c9",fg_color="#141c24", hover_color="#d60222")
+    botao_esporte.place(relx=0.38, rely=0.50, anchor="center")
+
+    principal = ctk.CTkFrame(janela, fg_color="#910109", width=550, height=940, corner_radius=0)
+    principal.place(relx=0.5, rely=0.574,anchor = "center")
+    wpp = ctk.CTkFrame(principal,fg_color="#c21502", width=550, height=660)
+    wpp.place(relx=0.5,rely=0.4,anchor="center")
+    slots = ctk.CTkFrame(janela, fg_color="#d4bfa3",width=500, height=550,corner_radius=0)
+    slots.place(relx=0.5,rely=0.45,anchor="center")
+    barra1 = ctk.CTkFrame(slots,fg_color="#ffd900", border_color="#ff9500", border_width=3, corner_radius=0,width=8,height=550)
+    barra1.place(relx=0.333,rely=0.5,anchor="center")
+    barra2 = ctk.CTkFrame(slots,fg_color="#ffd900", border_color="#ff9500", border_width=3, corner_radius=0,width=8,height=550)
+    barra2.place(relx=0.6659,rely=0.5,anchor="center")
+
+    play = ctk.CTkButton(principal,text="↺",fg_color="#4da616", corner_radius=40,width=80,height=80, font=("Times New Roman", 70), text_color="#ffc800",hover_color="#66c928")
+    play.place(relx=0.5,rely=0.85,anchor="center")
+def cavalo():
+    for elemento in janela.winfo_children():
+        elemento.destroy()
+    for elemento in janela.winfo_children():
+        elemento.destroy()
+    janela.configure(fg_color="#141c24")
+    frameLobby = ctk.CTkFrame(janela, fg_color="#141c24", height=125, corner_radius=0)
+    frameLobby.place(relx=0.0, rely=0.0, relwidth=1.0, anchor="nw")
+
+    bordaframeHO = ctk.CTkFrame(janela, fg_color="white", height=2, corner_radius=0)
+    bordaframeHO.place(relx=0.0, y=105, relwidth=1.0, anchor="nw")
+
+    botao3traco = ctk.CTkButton(frameLobby, fg_color="#141c24", text="≡", font=("Agency FB", 73, "bold"),hover_color="#141c24")
+    botao3traco.place(relx=0.03, rely=0.40, anchor="center")
+    ctk.CTkLabel(frameLobby, text="Grand\n       Jaguar", fg_color="#141c24", font=("Agency FB", 35, "bold")).place(relx=0.12, rely=0.45, anchor="center")
+    ctk.CTkButton(frameLobby, text="🐯", text_color="Orange", fg_color="#141c24",command= game, hover_color="#141c24",width=40, font=("Agency FB", 43, "bold")).place(relx=0.08, rely=0.45, anchor="center")
+
+    botao_casino = ctk.CTkButton(frameLobby, text="♠cassino", font=("Lucida Sans", 21, "bold"), text_color="#c9c9c9",fg_color="#141c24", hover_color="#d60222")
+    botao_casino.place(relx=0.3, rely=0.50, anchor="center")
+    botao_esporte = ctk.CTkButton(frameLobby, text="🏀esportes", font=("Lucida Sans", 21, "bold"), text_color="#c9c9c9",fg_color="#141c24", hover_color="#d60222")
+    botao_esporte.place(relx=0.38, rely=0.50, anchor="center")
+
+    principal = ctk.CTkFrame(janela, fg_color="#24282b", width=900, height=700)
+    principal.place(relx=0.5, rely=0.5, anchor="center")
+    apostaframe = ctk.CTkFrame(janela,fg_color="#24282b",width=900,height=700)
+    apostaframe.place(relx=0.5,rely=0.5,anchor="center")
+
+    corredor_escolhido = ctk.StringVar(value="Cavalinho 1")
+    ctk.CTkLabel(apostaframe, text="Escolha o Cavalinho:", font=("Arial", 12, "bold"),corner_radius=0).grid(row=0, column=0,
+                                                                                                  padx=10, pady=5)
+    menu_corredores = ctk.CTkOptionMenu(apostaframe,corner_radius=0, button_hover_color="#24282b", variable=corredor_escolhido,
+                                             values=["Cavalinho 1", "Cavalinho 2", "Cavalinho 3"])
+    menu_corredores.grid(row=0, column=1, padx=10, pady=5)
 lobby()
 janela.after(0, lambda: janela.state("zoomed"))
 janela.mainloop()
