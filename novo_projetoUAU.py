@@ -110,12 +110,139 @@ def lobby():
 def userInfo():
     for elemento in janela.winfo_children():
         elemento.destroy()
+    overlay_aberto = False
+    frame_overlay = None
+    funcio.execute("SELECT saldo FROM base WHERE email = ?",(e,))
+    result = funcio.fetchone()
+    saldonow = result[0]
+    def depositod():
+        nonlocal saldonow
+        textvalor = deposito.get().strip()
+        if not textvalor:
+            return
+        valor = float(textvalor)
+        saldonow += valor
+        funcio.execute(
+            "UPDATE base SET saldo = ? WHERE email = ?",
+            (saldonow,e)
+        )
+        conexao.commit()
+        saldo.configure(text=f"R${saldonow:.2f}")
+        deposito.delete(0, "end")
+    color_emoji = "#533566"
+    def alternar_overlay():
+        nonlocal overlay_aberto, frame_overlay
+        if not overlay_aberto:
+            frame_overlay = ctk.CTkFrame(janela, fg_color="gray20", corner_radius=10)
+            frame_overlay.place(relx=0.1, rely=0.1, relwidth=0.8, relheight=0.8)
+            texto = ctk.CTkLabel(frame_overlay, text="Change Profile Photo", font=("Arial Regular", 24,"bold"))
+            texto.place(relx=0.1,rely=0.05,anchor="center")
+            def emojiChangeA():
+                funcio.execute("UPDATE base SET pp = ? WHERE email = ?",(0, e))
+                conexao.commit()
+                alternar_overlay()
+                color_emoji = "#533566"
+                userInfo()
+            def emojiChangeB():
+                funcio.execute("UPDATE base SET pp = ? WHERE email = ?",(1, e))
+                conexao.commit()
+                alternar_overlay()
+                color_emoji = "#ff8257"
+                userInfo()
+            def emojiChangeC():
+                funcio.execute("UPDATE base SET pp = ? WHERE email = ?",(2, e))
+                conexao.commit()
+                alternar_overlay()
+                color_emoji = "#00d26a"
+                userInfo()
+            def emojiChangeD():
+                funcio.execute("UPDATE base SET pp = ? WHERE email = ?",(3, e))
+                conexao.commit()
+                alternar_overlay()
+                color_emoji = "#179354"
+                userInfo()
+            def emojiChangeE():
+                funcio.execute("UPDATE base SET pp = ? WHERE email = ?",(4, e))
+                conexao.commit()
+                alternar_overlay()
+                color_emoji = "#ffb235"
+                userInfo()
+            def emojiChangeF():
+                funcio.execute("UPDATE base SET pp = ? WHERE email = ?",(5, e))
+                conexao.commit()
+                alternar_overlay()
+                color_emoji = "#b05d46"
+                userInfo()
+            def emojiChangeG():
+                funcio.execute("UPDATE base SET pp = ? WHERE email = ?",(6, e))
+                conexao.commit()
+                alternar_overlay()
+                color_emoji = "#86d72f"
+                userInfo()
+            def emojiChangeH():
+                funcio.execute("UPDATE base SET pp = ? WHERE email = ?",(7, e))
+                conexao.commit()
+                alternar_overlay()
+                color_emoji = "#ff8687"
+                userInfo()
+            def emojiChangeI():
+                funcio.execute("UPDATE base SET pp = ? WHERE email = ?",(8, e))
+                conexao.commit()
+                alternar_overlay()
+                color_emoji = "#fea931"
+                userInfo()
+            def emojiChangeJ():
+                funcio.execute("UPDATE base SET pp = ? WHERE email = ?",(9, e))
+                conexao.commit()
+                alternar_overlay()
+                color_emoji = "#00a6ed"
+                userInfo()
+            def emojiChangeK():
+                funcio.execute("UPDATE base SET pp = ? WHERE email = ?",(11, e))
+                conexao.commit()
+                alternar_overlay()
+                color_emoji = "#f5d455"
+                userInfo()
+            button_emojiA = ctk.CTkButton(frame_overlay,text="👤", text_color="#533566", font=("Arial", 42), fg_color="#293142",border_color="#1a1a1a",border_width=3, width=100,height=100,command=emojiChangeA)
+            button_emojiA.place(relx=0.1,rely=0.2,anchor="center")
+            button_emojiB = ctk.CTkButton(frame_overlay,text="🐙", text_color="#ff8257", font=("Arial", 42), fg_color="#293142",border_color="#1a1a1a",border_width=3, width=100,height=100,command=emojiChangeB)
+            button_emojiB.place(relx=0.2,rely=0.2,anchor="center")
+            button_emojiC = ctk.CTkButton(frame_overlay,text="🐉", text_color="#00d26a", font=("Arial", 42), fg_color="#293142",border_color="#1a1a1a",border_width=3, width=100,height=100,command=emojiChangeC)
+            button_emojiC.place(relx=0.3,rely=0.2,anchor="center")
+            button_emojiD = ctk.CTkButton(frame_overlay,text="🤑", text_color="#179354", font=("Arial", 42), fg_color="#293142",border_color="#1a1a1a",border_width=3, width=100,height=100,command=emojiChangeD)
+            button_emojiD.place(relx=0.4,rely=0.2,anchor="center")
+            button_emojiE = ctk.CTkButton(frame_overlay,text="🤠", text_color="#ffb235", font=("Arial", 42), fg_color="#293142",border_color="#1a1a1a",border_width=3, width=100,height=100,command=emojiChangeE)
+            button_emojiE.place(relx=0.5,rely=0.2,anchor="center")
+            button_emojiF = ctk.CTkButton(frame_overlay,text="💩", text_color="#b05d46", font=("Arial", 42), fg_color="#293142",border_color="#1a1a1a",border_width=3, width=100,height=100,command=emojiChangeF)
+            button_emojiF.place(relx=0.6,rely=0.2,anchor="center")
+            button_emojiG = ctk.CTkButton(frame_overlay,text="👽", text_color="#86d72f", font=("Arial", 42), fg_color="#293142",border_color="#1a1a1a",border_width=3, width=100,height=100,command=emojiChangeG)
+            button_emojiG.place(relx=0.7,rely=0.2,anchor="center")
+            button_emojiH = ctk.CTkButton(frame_overlay,text="🐷", text_color="#ff8687", font=("Arial", 42), fg_color="#293142",border_color="#1a1a1a",border_width=3, width=100,height=100,command=emojiChangeH)
+            button_emojiH.place(relx=0.8,rely=0.2,anchor="center")
+            button_emojiI = ctk.CTkButton(frame_overlay,text="😼", text_color="#fea931", font=("Arial", 42), fg_color="#293142",border_color="#1a1a1a",border_width=3, width=100,height=100,command=emojiChangeI)
+            button_emojiI.place(relx=0.9,rely=0.2,anchor="center")
+            button_emojiJ = ctk.CTkButton(frame_overlay,text="🐳", text_color="#00a6ed", font=("Arial", 42), fg_color="#293142",border_color="#1a1a1a",border_width=3, width=100,height=100,command=emojiChangeJ)
+            button_emojiJ.place(relx=0.1,rely=0.4,anchor="center")
+            button_emojiK = ctk.CTkButton(frame_overlay,text="🐣", text_color="#f5d455", font=("Arial", 42), fg_color="#293142",border_color="#1a1a1a",border_width=3, width=100,height=100,command=emojiChangeK)
+            button_emojiK.place(relx=0.2,rely=0.4,anchor="center")
+            botao_fechar = ctk.CTkButton(frame_overlay, text="Close", command=alternar_overlay)
+            botao_fechar.place(relx=0.95,rely=0.97,anchor="center")
+            overlay_aberto = True
+        else:
+            if frame_overlay:
+                frame_overlay.place_forget()
+                frame_overlay.destroy()
+            overlay_aberto = False
+
     janela.configure(fg_color="#121212")
     funcio.execute(
         "SELECT username, saldo, pp FROM base WHERE email = ?",
         (e,)
     )
     data = funcio.fetchone()
+    pictures = ["👤", "🐙", "🐉", "🤑", "🤠", "💩", "👽", "🐷", "😼", "🐳", "🐯", "🐣"]
+    ind = int(data[2])
+    profile_picture = pictures[ind]
     canvas = ctk.CTkCanvas(janela, width=500, height=500, bg="#121212", highlightthickness=0)
     canvas.place(relx=0.2, rely=0.45, anchor="center")
     canvas.create_oval(10, 10, 300, 300, fill="#2d3030", outline="orange", width=5)
@@ -125,11 +252,11 @@ def userInfo():
     botao3traco.place(relx=0.03,rely=0.40,anchor="center")
     ctk.CTkLabel(frameLobbys, text="Grand\n       Jaguar",fg_color="black", font=("Agency FB", 35, "bold")).place(relx=0.12,rely=0.45,anchor="center")
     ctk.CTkButton(frameLobbys, text="🐯", text_color="Orange", fg_color="black",command= game, hover_color="black",width=40, font=("Agency FB", 43, "bold")).place(relx=0.08, rely=0.45, anchor="center")
-    ctk.CTkLabel(janela, text="data[2]",fg_color="#2d3030", font=("Arial Regular", 80, "bold")).place(relx=0.15,rely=0.35,anchor = "center")
-    ctk.CTkLabel(janela, text="data[0]", font=("Arial Regular", 24, "bold")).place(relx=0.15, rely=0.57, anchor="center")
+    ctk.CTkLabel(janela, text=profile_picture,fg_color="#2d3030",text_color= color_emoji, font=("Arial Regular", 120, "bold")).place(relx=0.15,rely=0.35,anchor = "center")
+    ctk.CTkLabel(janela, text=data[0], font=("Arial Regular", 24, "bold")).place(relx=0.15, rely=0.57, anchor="center")
     ctk.CTkFrame(janela,fg_color="#121212", border_color="#d9c25b",border_width=3, width=380,height=200).place(relx=0.15,rely=0.75,anchor="center")
     ctk.CTkLabel(janela, text="Saldo: ", font=("Microsoft Sans Serif", 24), text_color="white").place(relx=0.15, rely=0.68,anchor="center")
-    saldo = ctk.CTkLabel(janela,text=f"R$data[1]:.2f",text_color="#d9c25b", font=("Microsoft Sans Serif", 38))
+    saldo = ctk.CTkLabel(janela,text=f"R${data[1]:.2f}",text_color="#d9c25b", font=("Microsoft Sans Serif", 38))
     saldo.place(relx=0.15, rely=0.765, anchor="center")
     ctk.CTkFrame(janela,fg_color="#1a1a1a", width=500,height=650, corner_radius=0, border_color="#7ad470",border_width=3).place(relx=0.55,rely=0.5,anchor="center")
     ctk.CTkLabel(janela, text="Deposit",fg_color="#1a1a1a",text_color="white", font=("Arial Rounded MT Bold", 28)).place(relx=0.472, rely=0.3, anchor="center")
@@ -141,8 +268,11 @@ def userInfo():
     vcmd = (janela.register(validar), "%P")
     deposito = ctk.CTkEntry(janela, placeholder_text="🪙Ex: 34.50", font=("Arial Regular", 28), width=400,height=75, validate ="key", validatecommand=vcmd)
     deposito.place(relx =0.55, rely=0.37, anchor = "center")
-    sendDeposit = ctk.CTkButton(janela,text="DEPOSIT", text_color="#1a1a1a", fg_color="#2fc91e", width=300,height=85, corner_radius=50, hover_color="#0dd62b")
+    sendDeposit = ctk.CTkButton(janela,text="DEPOSIT", text_color="#1a1a1a", fg_color="#2fc91e", width=300,height=85,bg_color="#121212", corner_radius=50, hover_color="#0dd62b", command=depositod)
     sendDeposit.place(relx=0.55,rely=0.7,anchor="center")
+    botao_abrir = ctk.CTkButton( janela,text="🖌",corner_radius=15,width=40,height=40,font=("Arial", 24),text_color="white",hover_color="#555555",fg_color="#2d3030", bg_color="transparent",command=alternar_overlay)
+    botao_abrir.place(relx=0.22, rely=0.46, anchor="center")
+
 def game():
     for elemento in janela.winfo_children():
         elemento.destroy()
